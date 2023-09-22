@@ -5,7 +5,8 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background: #0f0e14 url('./src/assets/digital_scroll.jpg') no-repeat;
+  background-size: 100vh;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -14,30 +15,47 @@
   -webkit-text-size-adjust: 100%;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
 body {
   margin: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background: linear-gradient(45deg, #31272880, #4a444780);
+  animation: gradientFlow 10s ease infinite;
+  background-size: 200% 200%;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+
+  background: radial-gradient(
+    circle at center,
+    rgb(255, 205, 0, 0.05),
+    transparent
+  );
+  background-size: 200% 200%;
+  pointer-events: none;
+}
+
+a {
+  color: inherit;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  font-family: 'Roboto Flex', sans-serif;
 }
 
 button {
-  border-radius: 8px;
+  border-radius: 0.5rem;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
@@ -47,25 +65,14 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,500&display=swap');
@@ -82,40 +89,11 @@ button:focus-visible {
   }
 }
 
-@keyframes goldShimmer {
-  0% {
-    background-position: -50% -50%;
-    opacity: 0;
-  }
-  50% {
-    background-position: 150% 150%;
-    opacity: 0.6;
-  }
-  100% {
-    background-position: 300% 300%;
-    opacity: 0;
-  }
-}
-
-#root {
-  width: 100%;
-  height: 100%;
-  font-family: 'Roboto Flex', sans-serif;
-}
-
-body {
-  background: #0f0e14 url('./src/assets/digital_scroll.jpg') no-repeat;
-  background-position: max(10vh, 0) 0;
-  background-size: 100vh;
-}
-
 .app {
-  background: linear-gradient(45deg, #31272880, #0f0e1480);
-  background-size: 200% 200%;
-  animation: gradientFlow 30s ease infinite;
   width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   height: 100vh;
   position: relative;
@@ -123,21 +101,52 @@ body {
   color: white;
 }
 
+.app-headings-container,
+footer {
+  width: 100%;
+  padding: 2rem;
+  text-align: right;
+  color: #fff3e5;
+  font-size: 0.5rem;
+  opacity: 0.4;
+}
+
+.app-headings-container h1,
+.app-headings-container h2 {
+  padding-right: 2rem;
+}
+
+.app-headings-container:hover {
+  opacity: 0.8;
+}
+
+.app-headings-container h1 {
+  margin: 0;
+}
+
 .container {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-
-  border-radius: 10px;
-
   width: 45rem;
   max-width: 100%;
-  margin: auto;
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  border-radius: 10px;
 }
 
 .categories {
+  display: flex;
   flex: 1;
   margin-right: 20px;
+  gap: 1rem;
+}
+
+.buttons {
+  margin-left: 1rem;
+  display: none;
 }
 
 button {
@@ -169,11 +178,35 @@ button:nth-child(2n) {
   margin-left: 1rem;
 }
 
+select {
+  font-size: inherit;
+  padding: 0.8rem;
+  border: 0;
+  background: transparent linear-gradient(to bottom, black, #000000c0);
+  border-radius: 0.5rem;
+  outline-color: black;
+  border-right: solid transparent 12px;
+}
+
+select:focus,
+select:active {
+  outline: 2px solid #8c7955;
+}
+
+.button--refresh {
+  width: unset;
+  line-height: 1rem;
+  padding: 0.8rem 1rem;
+  margin: unset;
+  display: unset;
+}
+
 .haiku-wrapper {
   flex: 2;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 2rem;
 }
 .haiku {
   align-self: center;
@@ -181,6 +214,7 @@ button:nth-child(2n) {
   width: fit-content;
   font-family: serif;
   color: #ffffffa0;
+  padding: 1rem;
 }
 
 .haiku .line:nth-child(1) {
@@ -189,4 +223,47 @@ button:nth-child(2n) {
 
 .haiku .line:nth-child(3) {
   margin-left: -1rem;
+}
+
+footer {
+  text-align: center;
+  font-size: 1rem;
+}
+
+@media (min-width: 600px) {
+  .container {
+    flex-direction: row;
+  }
+  .buttons {
+    display: block;
+  }
+  select {
+    display: none;
+  }
+  .button--refresh {
+    display: none;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    font-size: 1.2rem;
+    width: 60rem;
+  }
+  .haiku {
+    font-size: 2rem;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
 }
