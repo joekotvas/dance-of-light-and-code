@@ -5,7 +5,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background: #0f0e14 url('./src/assets/digital_scroll.jpg') no-repeat;
+  background: #0f0e14 url('./public/digital_scroll.jpg') no-repeat;
   background-size: 100vh;
 
   font-synthesis: none;
