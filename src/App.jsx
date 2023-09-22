@@ -8,6 +8,11 @@ const App = () => {
   const [haiku, setHaiku] = useState([])
 
   const composeHaiku = (category = selectedCategory) => {
+    category =
+      category ||
+      Object.keys(haikuData)[
+        Math.floor(Math.random() * Object.keys(haikuData).length)
+      ]
     setSelectedCategory(category)
     const getRandomLine = (lines) =>
       lines[Math.floor(Math.random() * lines.length)]
